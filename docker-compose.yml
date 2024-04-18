@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  ubuntu1:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    # image: ubuntu
+    container_name: ubuntu1
+    networks:
+      - tcpdump_docker_network
+
+  ubuntu2:
+    build:
+      context: .
+      dockerfile: Dockerfile.nginx
+    container_name: ubuntu2
+    command: /bin/bash -c "echo 'service nginx start' > nginx.sh && chmod +x nginx.sh && ./nginx.sh && sleep infinity"
+    ports:
+      - 8033:80
+    networks:
+      - tcpdump_docker_network
+
+networks:
+  tcpdump_docker_network:
+    driver: bridge
