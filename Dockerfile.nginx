@@ -1,0 +1,12 @@
+FROM ubuntu:latest
+
+# Instalação de pacotes
+RUN apt-get update && \
+    apt-get install -y \
+    tcpdump \
+    curl \
+    iputils-ping \
+    nginx
+
+# Mantém o container em execução
+# CMD ["sleep", "infinity"]
